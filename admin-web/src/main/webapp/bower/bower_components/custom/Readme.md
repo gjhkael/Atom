@@ -1,0 +1,1 @@
+Custom package made for bower demonstration

@@ -1,0 +1,380 @@
+<div ng-app="libModule" ng-controller="valid" id="form"
+     class="lift:surround?with=default;at=page_content">
+
+    <div class="container body">
+        <div class="main_container">
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div>
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Module LIB</h3>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div class="title_left">
+                            <button type="button" class="btn  pull-right" ng-click="editLib(ele)"
+                                    data-toggle="modal"
+                                    data-target="#addLibs">
+                                <i class="fa fa-plus fa-lg"></i>
+                            </button>
+                        </div>
+                        <table data-row-style="rowStyle"
+                               class="table table-hover">
+                            <thead>
+                            <tr class="success">
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Lib Path</th>
+                                <th>Owner</th>
+                                <th>Params</th>
+                                <th style="color: red">Action</th>
+                            </tr>
+                            <tr ng-repeat="ele in names" class="info">
+                                <td>{{ele.name}}</td>
+                                <td>{{ele.type}}</td>
+                                <td>{{ele.libPath}}</td>
+                                <td>{{ele.owner}}</td>
+                                <td>{{ele.params}}</td>
+                                <td>
+                                    <a ng-click="editLib(ele)" class="close-link"
+                                       data-toggle="modal"
+                                       data-target="#addLibs">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+
+                                    <a class="close-link">
+                                        <i class="fa fa-remove fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+
+                    <!--Del Warning-->
+                    <!-- 模态框（Modal） -->
+                    <!--<div class="modal fade" id="delWar" tabindex="-1" role="dialog"-->
+                    <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+                    <!--<div class="modal-dialog">-->
+                    <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close"-->
+                    <!--data-dismiss="modal" aria-hidden="true">-->
+                    <!--&times;-->
+                    <!--</button>-->
+                    <!--<h4 class="modal-title" id="delWarning">-->
+                    <!--Warning-->
+                    <!--</h4>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body">-->
+                    <!--Delete Module?-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-primary"-->
+                    <!--data-dismiss="modal">Cancel-->
+                    <!--</button>-->
+                    <!--<button  type="button"-->
+                    <!--class="btn btn-success">-->
+                    <!--Delete-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; /.modal &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--Del Warning-->
+
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="addLibs" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close"
+                                            data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Add internal model
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <form ng-submit="processFrom()" id="addLib"
+                                                      class="form-horizontal form-label-left input_mask">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                               for="name">Name
+                                                            <span class="required">*</span>
+                                                        </label>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input type="text" id="name"
+                                                                   required="required"
+                                                                   class="form-control col-md-7 col-xs-12"
+                                                                   ng-model="formData.name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                               for="type">Type <span
+                                                                class="required">*</span>
+                                                        </label>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input type="text" id="type" name="type"
+                                                                   required="required"
+                                                                   class="form-control col-md-7 col-xs-12"
+                                                                   disabled="true"
+                                                                   placeholder="basic.Circle"
+                                                                   ng-model="formData.type">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="libPath"
+                                                               class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                            Lib path(hdfs)
+                                                            <span class="required">*</span>
+                                                        </label>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="libPath"
+                                                                   required="required"
+                                                                   class="form-control col-md-7 col-xs-12"
+                                                                   type="text" name="libPath"
+                                                                   ng-model="formData.libPath">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                               for="owner">
+                                                            Owner
+                                                            <span class="required">*</span>
+                                                        </label>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="owner"
+                                                                   class="form-control col-md-7 col-xs-12"
+                                                                   required="required" type="text"
+                                                                   ng-model="formData.owner">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label
+                                                                class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                                for="params">
+                                                            Params
+                                                        </label>
+
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <textarea id="params" class="form-control col-md-7
+                                                          col-xs-12"
+                                                          rows="3" ng-model="params"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="ln_solid"></div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                            <button type="button"
+                                                                    class="btn btn-primary"
+                                                                    data-dismiss="modal"
+                                                                    id="doAdd">Cancel
+                                                            </button>
+                                                            <button type="submit"
+                                                                    class="btn btn-success">Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+
+                </div>
+                <!-- /page content -->
+            </div>
+        </div>
+        <!--table-->
+        <script src="js/bootstrap-table.min.js"></script>
+        <script src="js/bootstrap-table-zh-CN.min.js"></script>
+        <!-- bootstrap-wysiwyg -->
+        <script src="bower/bower_components/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+        <script src="vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+        <!-- jQuery Tags Input -->
+        <script src="vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+        <!-- Switchery -->
+        <script src="bower/bower_components/switchery/dist/switchery.min.js"></script>
+        <!-- Select2 -->
+        <script src="bower/bower_components/select2/dist/js/select2.full.min.js"></script>
+        <!-- Parsley -->
+        <script src="bower/bower_components/parsleyjs/dist/parsley.min.js"></script>
+        <!-- Autosize -->
+        <script src="vendors/autosize/dist/autosize.min.js"></script>
+        <!-- jQuery autocomplete -->
+        <script src="vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+        <!-- starrr -->
+        <script src="vendors/starrr/dist/starrr.js"></script>
+
+        <!-- bootstrap-wysiwyg -->
+        <!--<script>-->
+        <!--$(document).ready(function () {-->
+        <!--$('.xcxc').click(function () {-->
+        <!--$('#descr').val($('#editor').html());-->
+        <!--});-->
+        <!--});-->
+
+        <!--$(document).ready(function () {-->
+        <!--function initToolbarBootstrapBindings() {-->
+        <!--var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',-->
+        <!--'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',-->
+        <!--'Times New Roman', 'Verdana'-->
+        <!--],-->
+        <!--fontTarget = $('[title=Font]').siblings('.dropdown-menu');-->
+        <!--$.each(fonts, function (idx, fontName) {-->
+        <!--fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));-->
+        <!--});-->
+        <!--$('a[title]').tooltip({-->
+        <!--container: 'body'-->
+        <!--});-->
+        <!--$('.dropdown-menu input').click(function () {-->
+        <!--return false;-->
+        <!--})-->
+        <!--.change(function () {-->
+        <!--$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');-->
+        <!--})-->
+        <!--.keydown('esc', function () {-->
+        <!--this.value = '';-->
+        <!--$(this).change();-->
+        <!--});-->
+
+        <!--$('[data-role=magic-overlay]').each(function () {-->
+        <!--var overlay = $(this),-->
+        <!--target = $(overlay.data('target'));-->
+        <!--overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());-->
+        <!--});-->
+
+        <!--if ("onwebkitspeechchange" in document.createElement("input")) {-->
+        <!--var editorOffset = $('#editor').offset();-->
+
+        <!--$('.voiceBtn').css('position', 'absolute').offset({-->
+        <!--top: editorOffset.top,-->
+        <!--left: editorOffset.left + $('#editor').innerWidth() - 35-->
+        <!--});-->
+        <!--} else {-->
+        <!--$('.voiceBtn').hide();-->
+        <!--}-->
+        <!--}-->
+
+        <!--function showErrorAlert(reason, detail) {-->
+        <!--var msg = '';-->
+        <!--if (reason === 'unsupported-file-type') {-->
+        <!--msg = "Unsupported format " + detail;-->
+        <!--} else {-->
+        <!--console.log("error uploading file", reason, detail);-->
+        <!--}-->
+        <!--$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +-->
+        <!--'<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');-->
+        <!--}-->
+
+        <!--initToolbarBootstrapBindings();-->
+
+        <!--$('#editor').wysiwyg({-->
+        <!--fileUploadError: showErrorAlert-->
+        <!--});-->
+
+        <!--window.prettyPrint && prettyPrint();-->
+        <!--});-->
+        <!--</script>-->
+        <!-- /bootstrap-wysiwyg -->
+
+
+        <!-- jQuery Tags Input -->
+        <!--<script>-->
+        <!--function onAddTag(tag) {-->
+        <!--alert("Added a tag: " + tag);-->
+        <!--}-->
+
+        <!--function onRemoveTag(tag) {-->
+        <!--alert("Removed a tag: " + tag);-->
+        <!--}-->
+
+        <!--function onChangeTag(input, tag) {-->
+        <!--alert("Changed a tag: " + tag);-->
+        <!--}-->
+
+        <!--$(document).ready(function () {-->
+        <!--$('#tags_1').tagsInput({-->
+        <!--width: 'auto'-->
+        <!--});-->
+        <!--});-->
+        <!--</script>-->
+        <!-- /jQuery Tags Input -->
+
+        <!-- Select2 -->
+        <!--<script>-->
+        <!--$(document).ready(function () {-->
+        <!--$("#PType").select2({-->
+        <!--placeholder: "Select a parameter group",-->
+        <!--allowClear: true-->
+        <!--});-->
+        <!--$("#DataType").select2({-->
+        <!--placeholder: "Select a data type",-->
+        <!--allowClear: true-->
+        <!--})-->
+        <!--$(".select2_group").select2({});-->
+        <!--});-->
+        <!--</script>-->
+        <!-- /Select2 -->
+        <!-- Autosize -->
+        <script>
+            $(document).ready(function () {
+                autosize($('.resizable_textarea'));
+            });
+        </script>
+        <!-- /Autosize -->
+
+        <!--angular-->
+        <script src="js/angular.js"></script>
+        <!--graph type-->
+        <script>
+            var libModule = angular.module('libModule', []).controller('valid', function ($scope, $http, $timeout) {
+                        $scope.processDel = function (ele) {
+                            alert(ele.Name)
+                        };
+                        $scope.editLib = function (ele) {
+                            $scope.formData = ele
+                        };
+                        $scope.formData = {
+                            type: 'basic.Circle'
+                        };
+                        $scope.processFrom = function () {
+                            alert(angular.isDefined($scope.formData.birthday))
+                        };
+
+                        $timeout(function () {
+                            $http.get("http://10.8.84.191:8089/internalModules").success(function (data) {
+                                $scope.names = data
+                            });
+                        }, 100);
+                    }
+            )
+        </script>
+    </div>
+</div>

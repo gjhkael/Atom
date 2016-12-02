@@ -1,0 +1,20 @@
+{
+  "name": "custom",
+  "version": "1.0.0",
+  "authors": [
+    "bachtranngoc <bachtranngoc@yahoo.com>"
+  ],
+  "description": "A custom package created to demonstrate creation of bower package",
+  "main": "lib/Custom.js",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

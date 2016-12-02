@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ctrip.atom</groupId>
+        <artifactId>di-ml-tool</artifactId>
+        <version>0.10</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>atom-assembly_2.10</artifactId>
+    <name>Atom Project Assembly</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <atom.jar.dir>scala-${scala.binary.version}</atom.jar.dir>
+        <atom.jar.basename>atom-assembly-${project.version}.jar</atom.jar.basename>
+        <atom.jar>${project.build.directory}/${atom.jar.dir}/${atom.jar.basename}</atom.jar>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ctrip.atom</groupId>
+            <artifactId>atom-core_${scala.binary.version}</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ctrip.atom</groupId>
+            <artifactId>atom-mllib_${scala.binary.version}</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptor>src/main/assembly/assembly.xml</descriptor>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

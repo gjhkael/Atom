@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+java -cp opt/app/spark-1.4.1/conf/:/opt/app/spark-1.4.1/assembly/target/scala-2.10/spark-assembly-1.4.1-hadoop2.0.0-cdh4.6.0.jar:/opt/app/spark-1.4.1/lib_managed/jars/datanucleus-core-3.2.10.jar:/opt/app/spark-1.4.1/lib_managed/jars/datanucleus-rdbms-3.2.9.jar:/opt/app/spark-1.4.1/lib_managed/jars/datanucleus-api-jdo-3.2.6.jar:/etc/hadoop/conf/:learningscala-1.0-SNAPSHOT.jar   sparktest.test
